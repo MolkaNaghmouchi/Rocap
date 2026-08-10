@@ -9,6 +9,7 @@ Plan de commercialisation pour une activité de **cloud hardware** (serveurs, GP
 - [`MODELE_OFFRE_COMMERCIALE_AO.md`](./MODELE_OFFRE_COMMERCIALE_AO.md) — plan type détaillé des 6 parties d'un dossier de réponse à AO (lettre de soumission, dossier administratif, présentation entreprise, mémoire technique, offre financière, annexes/garanties), à réutiliser pour chaque nouvelle consultation.
 - [`PLAN_ACTION_COMMERCIAL_APPELS_OFFRES.md`](./PLAN_ACTION_COMMERCIAL_APPELS_OFFRES.md) — plan d'action opérationnel : objectifs chiffrés, organisation (qui fait quoi), cycle de vie d'un AO avec rétroplanning, développement du portefeuille d'opportunités, outils, tableau de suivi et plan trimestriel.
 - [`PLAN_ACTION_COMMERCIAL_AO_IA.md`](./PLAN_ACTION_COMMERCIAL_AO_IA.md) — déclinaison spécifique au segment IA : où se cache réellement le hardware dans les AO "intelligence artificielle", mots-clés de veille dédiés, stratégie de partenariat avec intégrateurs/éditeurs IA, et plan en 4 phases sur 12 mois.
+- [`PLAN_ACTION_COMMERCIALISATION_IA_AUTOMATISATION.md`](./PLAN_ACTION_COMMERCIALISATION_IA_AUTOMATISATION.md) — plan détaillé pour vendre des solutions IA et d'automatisation (chatbots, RPA, agents, traitement de documents) en complément du hardware : offres packagées, modèle économique, plan mois par mois sur 12 mois, stack technique, équipe et KPIs.
 
 ## Résumé rapide
 
