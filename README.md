@@ -6,6 +6,7 @@ Plan de commercialisation pour une activité de **cloud hardware** (serveurs, GP
 
 - [`PLAN_COMMERCIALISATION_CLOUD_HARDWARE.md`](./PLAN_COMMERCIALISATION_CLOUD_HARDWARE.md) — plan complet de A à Z : analyse de marché, choix du business model, sourcing, juridique, financement, pricing, mise en place technique (MVP), vente, marketing, support, logistique, sécurité, équipe, croissance, roadmap opérationnelle sur 12-24 mois et checklist de démarrage rapide.
 - [`PLAN_APPELS_OFFRES.md`](./PLAN_APPELS_OFFRES.md) — stratégie de réponse aux appels d'offres publics et privés (marchés publics, TUNEPS, BOAMP) : prérequis, dossier administratif, mémoire technique, stratégie de prix, différenciation, groupement, et checklist avant dépôt.
+- [`MODELE_OFFRE_COMMERCIALE_AO.md`](./MODELE_OFFRE_COMMERCIALE_AO.md) — plan type détaillé des 6 parties d'un dossier de réponse à AO (lettre de soumission, dossier administratif, présentation entreprise, mémoire technique, offre financière, annexes/garanties), à réutiliser pour chaque nouvelle consultation.
 
 ## Résumé rapide
 
