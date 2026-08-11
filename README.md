@@ -1,6 +1,21 @@
 # Rocap
 
-Plan de commercialisation pour une activité de **cloud hardware** (serveurs, GPU, stockage, edge computing).
+Plan de commercialisation pour une activité de **cloud hardware** (serveurs, GPU, stockage, edge computing), et site vitrine pour commercialiser l'offre **IA & Automatisation**.
+
+## Site web
+
+Le site vitrine se trouve à la racine du dépôt (`index.html`, `css/`, `js/`) — un site statique sans dépendance ni build,
+prêt à être publié tel quel (GitHub Pages, Netlify, Vercel, ou tout hébergeur statique).
+
+Pour le prévisualiser en local :
+
+```bash
+python3 -m http.server 8000
+# puis ouvrir http://localhost:8000
+```
+
+Le contenu du site (offres, secteurs cibles, tarification) reprend directement les offres et le positionnement décrits dans
+[`PLAN_ACTION_COMMERCIALISATION_IA_AUTOMATISATION.md`](./PLAN_ACTION_COMMERCIALISATION_IA_AUTOMATISATION.md).
 
 ## Contenu
 
