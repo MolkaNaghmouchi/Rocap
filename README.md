@@ -1,4 +1,4 @@
-# Rocap
+# Global Expand
 
 Plan de commercialisation pour une activité de **cloud hardware** (serveurs, GPU, stockage, edge computing), et site vitrine pour commercialiser l'offre **IA & Automatisation**.
 

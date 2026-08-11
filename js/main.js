@@ -37,9 +37,9 @@ form.addEventListener("submit", (event) => {
     `Nom : ${name}\nEntreprise : ${company || "-"}\nEmail : ${email}\n\nBesoin :\n${message}`
   );
 
-  window.location.href = `mailto:contact@rocap.io?subject=${subject}&body=${body}`;
+  window.location.href = `mailto:contact@globalexpand.io?subject=${subject}&body=${body}`;
 
   formNote.style.color = "";
-  formNote.textContent = "Votre client mail va s'ouvrir pour envoyer la demande à contact@rocap.io.";
+  formNote.textContent = "Votre client mail va s'ouvrir pour envoyer la demande à contact@globalexpand.io.";
   form.reset();
 });
