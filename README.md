@@ -10,6 +10,7 @@ Plan de commercialisation pour une activité de **cloud hardware** (serveurs, GP
 - [`PLAN_ACTION_COMMERCIAL_APPELS_OFFRES.md`](./PLAN_ACTION_COMMERCIAL_APPELS_OFFRES.md) — plan d'action opérationnel : objectifs chiffrés, organisation (qui fait quoi), cycle de vie d'un AO avec rétroplanning, développement du portefeuille d'opportunités, outils, tableau de suivi et plan trimestriel.
 - [`PLAN_ACTION_COMMERCIAL_AO_IA.md`](./PLAN_ACTION_COMMERCIAL_AO_IA.md) — déclinaison spécifique au segment IA : où se cache réellement le hardware dans les AO "intelligence artificielle", mots-clés de veille dédiés, stratégie de partenariat avec intégrateurs/éditeurs IA, et plan en 4 phases sur 12 mois.
 - [`PLAN_ACTION_COMMERCIALISATION_IA_AUTOMATISATION.md`](./PLAN_ACTION_COMMERCIALISATION_IA_AUTOMATISATION.md) — plan détaillé pour vendre des solutions IA et d'automatisation (chatbots, RPA, agents, traitement de documents) en complément du hardware : offres packagées, modèle économique, plan mois par mois sur 12 mois, stack technique, équipe et KPIs.
+- [`PLAN_ACTION_PROJET_PAYANT_APPELS_OFFRES_FRANCE.md`](./PLAN_ACTION_PROJET_PAYANT_APPELS_OFFRES_FRANCE.md) — plan A à Z pour lancer un **projet payant indépendant** dédié aux appels d'offres en France (et non plus comme stratégie de vente du hardware) : combine service d'accompagnement AO, plateforme SaaS de veille/rédaction assistée par IA, et formation — statut juridique, offres et prix, MVP, marketing, roadmap 12-18 mois et checklist de démarrage.
 
 ## Résumé rapide
 
