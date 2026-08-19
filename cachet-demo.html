@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cachet — Le dossier qui se lit tout seul</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1C2541;
+    --ink-soft: #5B6178;
+    --paper: #F6F3EC;
+    --paper-alt: #EEE7D8;
+    --seal: #A63A3A;
+    --seal-dark: #7E2C2C;
+    --gold: #C9A24B;
+    --ai: #2B6E62;
+    --line: #DAD3C1;
+    --font-display: 'Fraunces', serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--ai); outline-offset: 3px; }
+
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 28px; }
+
+  header.nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 28px 0;
+  }
+  .logo {
+    font-family: var(--font-mono); font-weight: 500; letter-spacing: 0.06em;
+    font-size: 15px; text-transform: uppercase;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .logo::before {
+    content: ""; width: 9px; height: 9px; border-radius: 50%;
+    background: var(--seal); display: inline-block;
+  }
+  .nav-cta {
+    font-family: var(--font-mono); font-size: 13px; text-decoration: none;
+    border: 1px solid var(--ink); padding: 8px 16px; border-radius: 999px;
+    letter-spacing: 0.02em;
+  }
+
+  .hero { padding: 40px 0 20px; }
+  .eyebrow {
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em;
+    color: var(--seal); text-transform: uppercase; margin-bottom: 18px;
+    display: inline-block; border-bottom: 1px solid var(--seal); padding-bottom: 4px;
+  }
+  h1 {
+    font-family: var(--font-display); font-weight: 500;
+    font-size: clamp(2.4rem, 5vw, 3.6rem); line-height: 1.05;
+    margin: 0 0 20px; max-width: 15ch; letter-spacing: -0.01em;
+  }
+  .sub { font-size: 18px; color: var(--ink-soft); max-width: 46ch; margin: 0 0 44px; }
+  .sub strong { color: var(--ink); font-weight: 600; }
+
+  .demo-label {
+    font-family: var(--font-mono); font-size: 12px; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--ink-soft); margin-bottom: 14px;
+  }
+  .demo { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: start; }
+  @media (max-width: 860px) { .demo { grid-template-columns: 1fr; } }
+
+  .doc {
+    background: #fff; border: 1px solid var(--line); border-radius: 3px;
+    padding: 30px 28px; transform: rotate(-0.6deg);
+    box-shadow: 0 18px 40px -22px rgba(28,37,65,0.35); position: relative;
+  }
+  .doc::before {
+    content: "DCE — EXTRAIT"; position: absolute; top: -11px; left: 24px;
+    background: var(--gold); color: #fff; font-family: var(--font-mono);
+    font-size: 10px; letter-spacing: 0.1em; padding: 3px 10px; border-radius: 2px;
+  }
+  .doc h4 {
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em;
+    color: var(--ink-soft); margin: 18px 0 6px; text-transform: uppercase;
+  }
+  .doc h4:first-of-type { margin-top: 6px; }
+  .doc p { font-size: 14.5px; color: var(--ink); margin: 0 0 4px; }
+
+  .panel {
+    background: var(--paper-alt); border: 1px dashed var(--line); border-radius: 3px;
+    padding: 30px 28px; min-height: 340px; display: flex; flex-direction: column;
+  }
+
+  .analyse-btn {
+    margin: auto; font-family: var(--font-mono); font-size: 14px; letter-spacing: 0.04em;
+    background: var(--seal); color: #fff; border: none; padding: 16px 30px;
+    border-radius: 999px; cursor: pointer; text-transform: uppercase;
+    transition: transform 0.15s ease, background 0.15s ease;
+  }
+  .analyse-btn:hover { background: var(--seal-dark); }
+  .analyse-btn:active { transform: scale(0.97); }
+
+  .results { display: none; }
+  .results.show { display: block; animation: fadein 0.3s ease; }
+
+  .stamp {
+    width: 92px; height: 92px; border: 3px double var(--seal); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    color: var(--seal); font-family: var(--font-mono); font-size: 10.5px;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    transform: rotate(-9deg) scale(0); margin: 0 auto 20px; line-height: 1.3;
+  }
+  .stamp.pop { animation: stamp-in 0.45s cubic-bezier(.2,1.6,.4,1) forwards; }
+  @keyframes stamp-in { to { transform: rotate(-9deg) scale(1); } }
+  @keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+
+  .field {
+    display: flex; justify-content: space-between; gap: 12px; padding: 10px 0;
+    border-bottom: 1px solid var(--line); font-size: 13.5px;
+    opacity: 0; transform: translateY(6px); animation: rise 0.4s ease forwards;
+  }
+  .field span:first-child { color: var(--ink-soft); }
+  .field span:last-child {
+    font-family: var(--font-mono); color: var(--ai); text-align: right; font-weight: 500;
+  }
+  @keyframes rise { to { opacity: 1; transform: translateY(0); } }
+
+  .memo-title {
+    font-family: var(--font-mono); font-size: 11px; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--ink-soft); margin: 22px 0 8px;
+  }
+  .memo-text {
+    font-size: 14px; line-height: 1.65; color: var(--ink);
+    opacity: 0; animation: rise 0.5s ease forwards; animation-delay: 0.9s;
+  }
+  .memo-note {
+    font-size: 12px; color: var(--ink-soft); font-style: italic; margin-top: 10px;
+    opacity: 0; animation: rise 0.5s ease forwards; animation-delay: 1.1s;
+  }
+
+  .loading {
+    margin: auto; text-align: center; font-family: var(--font-mono);
+    font-size: 13px; color: var(--ink-soft); display: none;
+  }
+  .loading.show { display: block; }
+  .loading::after {
+    content: ""; display: block; width: 140px; height: 2px;
+    background: var(--line); margin: 14px auto 0; position: relative; overflow: hidden;
+  }
+  .loading.show::after {
+    background: linear-gradient(90deg, var(--line) 0%, var(--ai) 50%, var(--line) 100%);
+    background-size: 200% 100%; animation: scan 1s linear infinite;
+  }
+  @keyframes scan { to { background-position: -200% 0; } }
+
+  .steps { padding: 100px 0 70px; border-top: 1px solid var(--line); margin-top: 90px; }
+  .section-head {
+    font-family: var(--font-display); font-size: clamp(1.7rem, 3vw, 2.3rem); margin: 0 0 50px;
+  }
+  .step-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+  @media (max-width: 780px) { .step-grid { grid-template-columns: 1fr; } }
+  .step .num { font-family: var(--font-mono); color: var(--gold); font-size: 13px; margin-bottom: 14px; }
+  .step h3 { font-family: var(--font-display); font-size: 21px; font-weight: 500; margin: 0 0 10px; }
+  .step p { color: var(--ink-soft); font-size: 14.5px; margin: 0; }
+
+  .features { padding: 70px 0; border-top: 1px solid var(--line); }
+  .feat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  @media (max-width: 900px) { .feat-grid { grid-template-columns: repeat(2, 1fr); } }
+  .feat { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 24px 20px; }
+  .feat h4 { font-family: var(--font-body); font-size: 15px; font-weight: 600; margin: 0 0 8px; }
+  .feat p { font-size: 13px; color: var(--ink-soft); margin: 0; line-height: 1.5; }
+
+  .pricing { padding: 70px 0 90px; border-top: 1px solid var(--line); }
+  .price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 860px) { .price-grid { grid-template-columns: 1fr; } }
+  .price-card {
+    border: 1px solid var(--line); border-radius: 3px; padding: 28px 24px;
+    background: #fff; position: relative;
+  }
+  .price-card.mid { border-color: var(--seal); box-shadow: 0 20px 40px -26px rgba(166,58,58,0.4); }
+  .price-card .tag {
+    position: absolute; top: -11px; right: 20px; background: var(--seal); color: #fff;
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em;
+    padding: 3px 10px; border-radius: 2px; text-transform: uppercase;
+  }
+  .price-card h4 { font-family: var(--font-display); font-size: 19px; font-weight: 500; margin: 0 0 4px; }
+  .price-card .amount { font-family: var(--font-mono); font-size: 26px; margin: 10px 0 16px; }
+  .price-card .amount span { font-size: 13px; color: var(--ink-soft); }
+  .price-card ul { list-style: none; padding: 0; margin: 0; font-size: 13.5px; color: var(--ink-soft); }
+  .price-card li { padding: 7px 0; border-top: 1px solid var(--line); }
+  .price-card li:first-child { border-top: none; }
+
+  footer {
+    border-top: 1px solid var(--line); padding: 32px 0 50px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px; font-size: 13px; color: var(--ink-soft);
+  }
+  footer .logo { color: var(--ink); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="nav">
+    <div class="logo">Cachet</div>
+    <a class="nav-cta" href="#demo">Voir la démo</a>
+  </header>
+
+  <section class="hero" id="demo">
+    <span class="eyebrow">Dossier de consultation n° 2026-BTP-0847</span>
+    <h1>Le dossier qui se lit tout seul.</h1>
+    <p class="sub">Cachet lit vos appels d'offres, en extrait l'essentiel et rédige un premier <strong>mémoire technique</strong> — pendant que votre équipe fait autre chose.</p>
+
+    <div class="demo-label">Essayez avec un vrai extrait de DCE</div>
+    <div class="demo">
+      <div class="doc">
+        <h4>Article 3 — Objet du marché</h4>
+        <p>Nettoyage des locaux administratifs de la commune, pour une durée de 3 ans à compter de la notification.</p>
+        <h4>Article 4 — Modalités d'exécution</h4>
+        <p>Prestations réalisées du lundi au vendredi, entre 18h00 et 22h00, hors jours fériés.</p>
+        <h4>Article 7 — Capacités requises</h4>
+        <p>Certification ISO 14001 en cours de validité. Minimum 3 références de marchés similaires de plus de 100 000 € HT sur les 3 dernières années.</p>
+      </div>
+
+      <div class="panel">
+        <button class="analyse-btn" id="analyseBtn">Analyser le dossier</button>
+        <div class="loading" id="loading">Lecture du dossier…</div>
+
+        <div class="results" id="results">
+          <div class="stamp" id="stamp">Analysé ✓</div>
+          <div class="field" style="animation-delay:.05s"><span>Durée du marché</span><span>3 ans</span></div>
+          <div class="field" style="animation-delay:.15s"><span>Horaires</span><span>18h–22h, lun–ven</span></div>
+          <div class="field" style="animation-delay:.25s"><span>Certification exigée</span><span>ISO 14001</span></div>
+          <div class="field" style="animation-delay:.35s"><span>Références demandées</span><span>3, &gt;100k€</span></div>
+
+          <div class="memo-title">Premier jet — mémoire technique</div>
+          <p class="memo-text">« Notre société, certifiée ISO 14001, propose d'assurer le nettoyage des locaux administratifs de la commune du lundi au vendredi, de 18h à 22h, pour une durée de 3 ans. Nous justifions de références récentes sur des marchés de nettoyage de collectivités d'un montant supérieur à 100 000 € HT, démontrant notre capacité à répondre aux exigences de ce marché. »</p>
+          <p class="memo-note">À relire et compléter par votre équipe avant envoi.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="steps">
+    <h2 class="section-head">Comment ça marche</h2>
+    <div class="step-grid">
+      <div class="step">
+        <div class="num">01 — Lire</div>
+        <h3>Cachet ingère le DCE</h3>
+        <p>RC, CCTP, CCAP : chaque pièce est lue, et les délais, montants et exigences obligatoires sont repérés automatiquement.</p>
+      </div>
+      <div class="step">
+        <div class="num">02 — Rédiger</div>
+        <h3>Un premier mémoire s'écrit</h3>
+        <p>À partir de vos certifications et de vos réponses précédentes, Cachet propose un premier jet à corriger — pas à valider les yeux fermés.</p>
+      </div>
+      <div class="step">
+        <div class="num">03 — Vérifier</div>
+        <h3>Rien n'est oublié</h3>
+        <p>Chaque exigence du dossier est comparée à votre réponse avant l'envoi, pièce par pièce.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <h2 class="section-head">Ce que fait l'outil</h2>
+    <div class="feat-grid">
+      <div class="feat"><h4>Analyse automatique</h4><p>Extraction des délais, montants et exigences dès l'ouverture du dossier.</p></div>
+      <div class="feat"><h4>Rédaction assistée</h4><p>Un premier jet du mémoire technique, basé sur vos réponses passées.</p></div>
+      <div class="feat"><h4>Vérification de conformité</h4><p>Chaque pièce exigée est cochée avant l'envoi du dossier.</p></div>
+      <div class="feat"><h4>Veille des marchés</h4><p>Les appels d'offres pertinents pour votre activité, repérés chaque jour.</p></div>
+    </div>
+  </section>
+
+  <section class="pricing">
+    <h2 class="section-head">Tarifs</h2>
+    <div class="price-grid">
+      <div class="price-card">
+        <h4>Découverte</h4>
+        <div class="amount">Prix réduit<span> / 1er dossier</span></div>
+        <ul><li>1 à 2 dossiers analysés</li><li>1 utilisateur</li><li>Sans engagement</li></ul>
+      </div>
+      <div class="price-card mid">
+        <span class="tag">Le plus choisi</span>
+        <h4>Pro</h4>
+        <div class="amount">Abonnement<span> / mois</span></div>
+        <ul><li>Jusqu'à 20 dossiers / mois</li><li>Plusieurs utilisateurs</li><li>Base de connaissances partagée</li></ul>
+      </div>
+      <div class="price-card">
+        <h4>Entreprise</h4>
+        <div class="amount">Sur mesure</div>
+        <ul><li>Volumes importants</li><li>Intégrations dédiées</li><li>Accompagnement</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="logo">Cachet</div>
+    <div>Hébergé en France · Aucune installation · Accessible depuis un navigateur</div>
+  </footer>
+</div>
+
+<script>
+  const btn = document.getElementById('analyseBtn');
+  const loading = document.getElementById('loading');
+  const results = document.getElementById('results');
+  const stamp = document.getElementById('stamp');
+
+  btn.addEventListener('click', () => {
+    btn.style.display = 'none';
+    loading.classList.add('show');
+
+    setTimeout(() => {
+      loading.classList.remove('show');
+      results.classList.add('show');
+      requestAnimationFrame(() => stamp.classList.add('pop'));
+    }, 1200);
+  });
+</script>
+
+</body>
+</html>
